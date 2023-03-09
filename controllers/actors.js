@@ -33,6 +33,20 @@ function replace(req, res, next){
 
     Actors.findByPk(id)
             .then((obj) => {
+                const name = req.body.name ? req.body.name : "";
+                const last_name= req.body.last_name ? req.body.name : "";
+
+                object.update({name: name, last_name: last_name})
+                        .then(obj => res.json(obj))
+                        .catch(err => res.send(err));
+            }).catch(err => res.send(err));
+};
+
+function update(req, res, next){
+    const id = req.params.id;
+
+    Actors.findByPk(id)
+            .then((obj) => {
                 const name = req.body.name ? req.body.name : object.name;
                 const last_name= req.body.last_name ? req.body.name : object.name;
 
@@ -42,9 +56,6 @@ function replace(req, res, next){
             }).catch(err => res.send(err));
 };
 
-function update(req, res, next){
-    res.send(`respond with an update =${req.params.id}`);  
-};
 
 function destroy(req, res, next){
     const id = req.params.id;
