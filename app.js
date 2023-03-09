@@ -6,6 +6,14 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var directorsRouter = require('./routes/directors');
+var copiesRouter = require('./routes/copies');
+var membersRouter = require('./routes/members');
+var bookingsRouter = require('./routes/bookings');
+var actorsRouter = require('./routes/actors');
+var movies_actorsRouter = require('./routes/movies_actors');
+var moviesRouter = require('./routes/movies');
+var genresRouter = require('./routes/genres');
 
 var app = express();
 

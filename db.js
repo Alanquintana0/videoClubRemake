@@ -11,7 +11,14 @@ const sequelize = new Sequelize('video-club',
 const Director = directorModel(sequelize, Sequelize);
 const Genre = genreModel(sequelize, Sequelize);
 
+sequelize.sync({
+    force:true,
 
+}).then(() => {
+    console.log('Base de datos actualizada');
+}).catch(() => {
+    console.log("No connection");
+});
 
 
 
