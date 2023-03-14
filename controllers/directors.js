@@ -40,7 +40,7 @@ function replace(req, res, next){
             }).catch(err => res.send(err));
 };
 
-function replace(req, res, next){
+function update(req, res, next){
     const id = req.params.id;
     Director.findByPk(id)
             .then((object) => {
