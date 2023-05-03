@@ -4,5 +4,5 @@ module.exports = (sequelize, type) => {
         description: type.STRING,
         status: type.BOOLEAN
     });
-    return Genre;
+    return Genres;
 }
