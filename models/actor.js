@@ -1,13 +1,35 @@
-//Se define el modelo que exportara el archivo.
-module.exports = (sequelize, type) => {
-    //Se crea una constante con el nombre deseado y se 
-    //definen las caracteristicas del objeto.
-    const Actor = sequelize.define('actors', {
-        //id es un entero, que a la ves es la llave primaria y se
-        //va a autoincrementar.
-        id: {type: type.INTEGER, primaryKey: true, autoIncrement: true},
-        name: type.STRING,
-        lastName: type.STRING
-    });
-    return Actor;
+const mongoose = require('mongoose');
+
+//Schema
+const schema = mongoose.Schema({
+    __name:String,
+    __lastName:String
+})
+
+//Clase Actor
+class Actor{
+    constructor(name,lastName){
+        this.__name = name;
+        this.__lastName = lastName
+    }
+
+    get name(){
+        return this._name;
+    }
+    
+    set name(value){
+        this._name = value;
+    }
+
+    get lastName(){
+        return this._lastName;
+    }
+    
+    set lastName(value){
+        this._lastName = value;
+    }
+
 };
+
+schema.loadClass(Actor);
+module.exports = mongoose.model('Actor',schema);
