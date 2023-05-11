@@ -69,41 +69,47 @@ async function replace(req, res, next){
 
 };
 
-function update(req, res, next){
+async function update(req, res, next){
     const id = req.params.id;
-    let number = req.body.number ? req.body.number:"";
-    let format = req.body.format ? req.body.format:"";
-    let movieId = req.body.movieId ? req.body.movieId:"";
-    let status = req.body.status ? req.body.status:"";
-
+    let format = req.body.format;
+    let number = req.body.number;
+    let status = req.body.status;
+    let movieId = req.body.movieId;
+    
     let copy = new Object();
 
-    if(number) copy.number = number;
-    if(format) copy.format = format;
-    if(movieId) copy.movie = movieId;
-    if(status) copy.status = status;
-
-    Copy.findOneAndUpdate({"_id": id}, copy)
-            .then(obj => res.status(200).json({
-                message: `Copia con ${id} actualizada correctamente`,
-                obj: obj
-            })).catch(ex => res.status(500).json({
-                message: "No se pudo actualizar la copia",
-                err: ex
-            }));
+    if(format){
+        copy._format = format
+    }
+    if(number){
+        copy._movie = number;
+    }
+    if(status){
+        copy._status = status;
+    }
+    if(movieId){
+        let movie = await Movie.findOne({"_id":movieId});
+        copy._movie = movie
+    }
+    Copy.findOneAndUpdate({"_id":id},copy)
+        .then(obj=>res.status(200).json({
+            message:res.__("Copy.updated"),
+            obj:obj
+        })).catch(ex => res.status(500).json({
+            message:res.__("Copy.notupdated"),
+            err:ex
+        }));
 };
 
 function destroy(req, res, next){
     const id = req.params.id;
-
-    Copy.findByIdAndRemove({"_id": id})
-            .then(obj => res.status(200).json({
-                message: `Copia con ${id} eliminada correctamente`,
-                obj: obj
-            })).catch(ex => res.status(500).json({
-                message: "No se pudo eliminar la copia",
-                err: ex
-            }));
+    Copy.findOneAndDelete({"_id":id}).then(obj=>res.status(200).json({
+        message:res.__("Copy.deleted"),
+        obj:obj
+    })).catch(ex => res.status(500).json({
+        message:res.__("Copy.notdeleted"),
+        err:ex
+    }));
 };
 
 module.exports = {list,index,create,update,destroy,replace};

@@ -1,5 +1,5 @@
 {
     "secret":{
-       "key":"0f7dcda34f4d58651f8a38c3e08a4bd0"
+       "key":"d2cc2153ff7848f39596e0e423353fcf"
     },"dbChain":"mongodb://localhost:27017/videoclub"
 }

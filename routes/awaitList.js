@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/movies');
-
+const controller = require('../controllers/awaitLists');
 
 router.get('/', controller.list);
 

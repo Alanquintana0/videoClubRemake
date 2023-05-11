@@ -20,8 +20,8 @@ describe("Probar el sistema de autenticación",()=>{
     it("debería de obtener un login con user y password incorrectos",(done)=>{
         supertest(app).post("/login")
         .send({
-            "email":"alanquz@uach.mx",
-            "password":"abcd123"
+            "email":"luramirez@uach.mx",
+            "password":"abcd"
         })
         .expect(403)
         .end(function(err,res){

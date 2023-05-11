@@ -2,13 +2,19 @@ const express = require('express');
 const Actor = require('../models/actor');
 
 function list(req, res, next){
-    Actor.find().then(objs => res.status(200).json({
-        message:"lista de actores",
+    Actor.find().then(objs => {
+        logger.level("info");
+        logger.info(res.__("Actor.list"));
+        res.status(200).json({
+        message:res.__("Actor.list"),
         obj:objs
-    })).catch(ex => res.status(500).json({
-        message:"No se pudo consultar la información",
+    })}).catch(ex => {
+        logger.level("error");
+        logger.error(res.__('Actor.noinfo'));
+        res.status(500).json({
+        message:res.__("Actor.noinfo"),
         obj:ex
-    }));
+    })});
 };
 
 function index(req, res, next){
